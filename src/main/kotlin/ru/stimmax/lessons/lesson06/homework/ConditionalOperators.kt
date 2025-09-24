@@ -16,10 +16,9 @@ fun main () {
 // Напишите функцию, которая на основе номера месяца распечатывает сезон года. Номера месяцев начинаются с единицы.
 fun season (season: Int) {
     when (season) {
-        in 1..2 -> println("Winter")
+         1, 2, 12 -> println("Winter")
         in 3..5 -> println("Spring")
         in 6..8 -> println("Summer")
-        12 -> println("Winter")
         else -> println("Index out of season")
     }
 }
@@ -100,7 +99,7 @@ fun clothesToWeather (temperature: Int) {
         if ( temperature < 10) {
             println("куртка и шапка")
         }
-        else if (temperature in 10..18) {
+        else if (temperature <= 18) {
             println("ветровка")
         }
         else if (temperature > 18){
@@ -118,7 +117,7 @@ fun clothesToWeather (temperature: Int) {
 fun films (age: Int) {
     when (age) {
         in 0..9 -> println("детские")
-        in 10..18 -> println("подростковые")
+        in 10..< 18 -> println("подростковые")
         else -> println("18+")
     }
 }
