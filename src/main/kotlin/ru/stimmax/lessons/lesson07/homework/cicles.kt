@@ -7,48 +7,47 @@ fun main() {
 // 1 . Напишите цикл for, который выводит числа от 1 до 5.
     val consequence = 1..5
     for (i in consequence) {
-         println(i)
+         //println(i)
     }
 // 2 . Напишите цикл for, который выводит четные числа от 1 до 10.
     val consequen = 1..10
     for (i in consequen) {
         if (i % 2 == 0) {
-            println(i)
+            //println(i)
         }
     }
-
 
 // Обратный диапазон
 // 3 . Создайте цикл for, который выводит числа от 5 до 1.
     val conseq = 5 downTo 1
     for (i in conseq) {
-        println(i)
+        //println(i)
     }
 
 // 4 . Создайте цикл for, который выводит числа от 10 до 1, уменьшая их на 2.
     val con = 10 downTo 1
     for (i in con - 1) {
-        println(i-2)
+        //println(i-2)
     }
 
 // С шагом (step)
 // 5 . Используйте цикл for с шагом 2 для вывода чисел от 1 до 9.
     val enumirate = 1..9
     for (i in enumirate step 2) {
-        println(i)
+        //println(i)
     }
 
 // 6 . Напишите цикл for, который выводит каждое третье число в диапазоне от 1 до 20.
     val enum = 1..20
     for (i in enum step 3) {
-        println(i)
+        //println(i)
     }
 
 // Использование до (until)
 // 7 . Создайте числовую переменную 'size'. Используйте цикл for с шагом 2 для вывода чисел от 3 до size не включая size.
     val size = 13
     for (i in 3 until size step 2) {
-        println(i)
+        //println(i)
     }
 
 // Задания для цикла while
@@ -56,13 +55,13 @@ fun main() {
 // 8 . Создайте цикл while, который выводит квадраты чисел от 1 до 5.
     var counter = 0
     while (counter++ < 5) {
-        println(counter * counter)
+        //println(counter * counter)
     }
 
 // 9 . Напишите цикл while, который уменьшает число от 10 до 5. После этого вывести результат в консоль
     var counte = 10
     while (counte >= 5) {
-        println(counte)
+        //println(counte)
         counte--
     }
 
@@ -70,14 +69,14 @@ fun main() {
 // 10 . Используйте цикл do while, чтобы вывести числа от 5 до 1.
     var count = 5
     do {
-        println(count)
+        //println(count)
         count--
     } while (count >= 1)
 
 // 11 . Создайте цикл do while, который повторяется, пока счетчик меньше 10, начиная с 5.
     var coun = 5
     do {
-        println(coun)
+        //println(coun)
         coun++
     } while (coun < 10)
 
@@ -86,14 +85,14 @@ fun main() {
 // 12 . Напишите цикл for от 1 до 10 и используйте break, чтобы выйти из цикла при достижении 6.
     for (i in 1..10) {
         if (i == 6) break
-        println(i)
+        //println(i)
     }
 
 // 13 . Создайте цикл while, который бесконечно выводит числа, начиная с 1, но прерывается при достижении 10.
     var cou = 1
     while (cou < 100) {
         if (cou == 10) break
-        println(cou)
+        //println(cou)
         cou++
     }
 
@@ -101,7 +100,7 @@ fun main() {
 // 14 . В цикле for от 1 до 10 используйте continue, чтобы пропустить четные числа.
     for (i in 1..10) {
         if (i % 2 == 0) continue
-        println(i)
+        //println(i)
     }
 
 // 15 . Напишите цикл while, который выводит числа от 1 до 10, но пропускает числа, кратные 3.
@@ -109,7 +108,7 @@ fun main() {
     while (co <= 10) {
         co++
         if (co % 3 == 0) continue
-        println(co)
+        //println(co)
 
     }
 
@@ -127,7 +126,7 @@ fun main() {
 fun multiplicationTable (arg: Int) {
     for(i in 1..arg){
         for(j in 1..arg){
-            print("${i * j} \t")
+            print((i * j).toString() + " ")
         }
         println()
     }
@@ -158,20 +157,24 @@ fun sumEvenNumbers (arg: Int) {
     var sum = 0
     while (counter <= arg) {
         counter++
-        sum = counter /2 * (counter/2 + 1)
+        if (counter % 2 == 0)
+            sum += counter
     }
    println("Сумма четных чисел " + sum)
 }
 
 // 5 . Напишите функцию, которая используя вложенные циклы while, выведет заполненный прямоугольник размером 5x3 из символов *.
 fun rectangle (arg1: Int, arg2: Int) {
-    var counter = 0
-    while (counter <= arg1){
-        counter++
-        while (counter <= arg2) {
-            println("*".repeat(arg1))
-            counter++
+    var rows = 0
+    var coloms = 0
+    while (rows <= arg1){
+        rows++
+        while (coloms <= arg2) {
+            coloms++
+            print("*")
         }
+        coloms = 0
+        println()
     }
 }
 // 6 . Напишите функцию, которая используя цикл for найдёт суммы чётных и нечётных значений чисел от 1 до arg.
@@ -181,7 +184,7 @@ fun sumEvenAndOddNumbers (arg: Int) {
     var counter = 0
     for (i in 1..arg){
         if (i % 2 == 0) {
-            even = i / 2 * (i / 2 + 1)
+            even += i
         } else
             odd  += i
     }
