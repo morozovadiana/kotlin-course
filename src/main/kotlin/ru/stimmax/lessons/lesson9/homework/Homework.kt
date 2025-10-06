@@ -10,15 +10,18 @@ fun main() {
     val array2 = Array(10){""}
 
 // 3 . Создайте массив из 5 элементов типа Double и заполните его значениями, являющимися удвоенным индексом элемента.
-    val array3 = doubleArrayOf()
-    array3[0] = 3.34
-    array3[1] = 4.23
+    val array3 = DoubleArray(3)
+    for (element in array3.indices) {
+        array3[element] = element * 2.0
+        println(array3[element])
+    }
 
 // 4 . Создайте массив из 5 элементов типа Int. Используйте цикл, чтобы присвоить каждому элементу значение, равное его индексу,
 // умноженному на 3.
     val array4 = Array(5){ 0 }
     for (element in array4.indices) {
         array4[element] = (element + 1) * 3
+        println(array4[element])
     }
 
 // 5 . Создайте массив из 3 nullable строк. Инициализируйте его одним null значением и двумя строками.
@@ -26,21 +29,20 @@ fun main() {
 
 // 6 . Создайте массив целых чисел и скопируйте его в новый массив в цикле.
     val array6 = arrayOf(1,2,3,4,5)
-    var newArray = emptyArray<Int>()
-    for (element in 1..array6.size) {
-        newArray += array6[element]
+    val newArray = Array<Int>(5){0}
+    for (element in newArray.indices) {
+        newArray[element] = array6[element]
+        println(newArray[element])
     }
-    println(newArray)
-
 
 // 7 . Создайте два массива целых чисел одинаковой длины. Создайте третий массив, вычев значения одного из другого.
 // Распечатайте полученные значения.
     val array7 = arrayOf(1,2,3,4,5)
-    val newArray7 = arrayOf(6,7,8,9,0)
-    var newArray77 = emptyArray<Int>()
-    for (element in 1..newArray77.size) {
-        newArray77 += array7[element]-newArray7[element]
-        println(newArray77)
+    val newArray7 = arrayOf(0,9,8,7,6)
+    val newArray77 = Array<Int>(5){0}
+    for (element in newArray77.indices) {
+        newArray77[element] = newArray7[element]-array7[element]
+        println(newArray77[element])
     }
 
 // 8 . Создайте массив целых чисел. Найдите индекс элемента со значением 5. Если значения 5 нет в массиве, печатаем -1.
@@ -50,11 +52,11 @@ fun main() {
     var i = array8.lastIndex
     while (i++ < array8.size) {
         if (5 in array8) {
-            println(5)
-            break
+            println(" есть число 5")
         } else
             println(-1)
     }
+
 // 9 . Создайте массив целых чисел. Используйте цикл для перебора массива и вывода каждого элемента в консоль. Напротив
 // каждого элемента должно быть написано “чётное” или “нечётное”.
     val array9 = arrayOf(1,2,3,4,5)
@@ -69,7 +71,6 @@ fun main() {
 // котором принятая строка является подстрокой (метод contains()). Распечатай найденный элемент.
     val array10 = arrayOf("My", "Love", "Kotlin")
     arrrayStrings(array10, "Kotlin")
-
 
 // Работа со списками List
 // 1 . Создайте пустой неизменяемый список целых чисел.
@@ -90,6 +91,7 @@ fun main() {
     val list5 = mutableListOf<String>("Hello", "World", "Kotlin")
     list5.remove( "World")
 
+
 // 6 . Создайте список целых чисел и используйте цикл для вывода каждого элемента на экран.
     val lisy6 = listOf<Int>(1,2,3,4,5)
     for (el in lisy6) {
@@ -107,38 +109,39 @@ fun main() {
 
 // 9 . Создайте два списка строк и объедините их в один новый список, содержащий элементы обоих списков. Реши задачу с
 // помощью циклов.
-    val list9 = listOf<Int>(1,2,3,4,5)
-    val list91 = listOf<Int>(6,7,8,9)
-    val newList = mutableListOf<Int>()
-    for (el in list9) {
+    val list9 = listOf<String>("Hello", "World", "Kotlin")
+    val list91 = listOf<String>("Kitty", "Dog")
+    val newList = mutableListOf<String>("")
+    for (el in list9.indices) {
         newList.add(list9[el])
     }
-    for (element in list91) {
+    for (element in list91.indices) {
         newList.add(list91[element])
     }
 
 // 10 . Создайте список целых чисел и найдите в нем минимальный и максимальный элементы используя цикл.
     val list10 = listOf<Int>(1,2,3,4,5)
-    var min = 0
-    var max = 0
-    for (element in 1..list10.size) {
-        if (element > max) {
+    var min = list10[0]
+    var max = list10[0]
+    for (element in 1 until list10.size) {
+        if (list10[element] > max ) {
             max = list10[element]
         }
-        else if (element < min) {
+        if (list10[element] < min) {
             min = list10[element]
         }
     }
-
+    println("Минимальное значение - $min, максимальное значение -  $max")
 
 // 11 . Имея список целых чисел, создайте новый список, содержащий только четные числа из исходного списка используя цикл.
     val list11 = listOf<Int>(1,2,3,4,5)
     val newList11 = mutableListOf<Int>()
-    for (element in list11.indices) {
+    for (element in 1 until list11.size) {
         if (element % 2 == 0) {
             newList11.add(element)
         }
     }
+    println(newList11)
 
 //Работа с Множествами Set
 // 1 . Создайте пустое неизменяемое множество целых чисел.
@@ -166,7 +169,7 @@ fun main() {
 
 // 7 . Создай функцию, которая принимает множество строк (set) и строку и проверяет, есть ли в множестве указанная строка.
 // Нужно вернуть булево значение true если строка есть. Реши задачу через цикл.
-    val set7 = setOf<String>("Kotik", "Kitkat", "kotlin")
+    val set7 = setOf<String>("""Kotik, Kitkat, kotlin""")
     setStrings(set7, "Kotlin")
 
 
@@ -176,10 +179,11 @@ fun main() {
     for (element in set9) {
         newlist9.add(element)
     }
+
 }
 
 fun arrrayStrings(string: Array<String>, string1: String) {
-    for (element in 1..string.size) {
+    for (element in string.indices) {
         if (string[element].contains(string1)) {
             println(string[element])
         } else
@@ -189,7 +193,7 @@ fun arrrayStrings(string: Array<String>, string1: String) {
 
 fun setStrings(string: Set<String>, string1: String) {
     for (element in string) {
-        if (element == string1) {
+        if (element.lowercase() == string1.lowercase()) {
             println("True")
         } else
             println("False")
