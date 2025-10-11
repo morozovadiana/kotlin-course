@@ -1,7 +1,5 @@
 package ru.stimmax.ru.stimmax.lessons.lesson10.homework
 
-import javax.xml.crypto.Data
-
 fun main() {
 
 // Задачи на работу со словарём
@@ -54,9 +52,9 @@ fun main() {
 
 // 10 . Создайте словарь, где ключами являются строки, а значениями - списки целых чисел. Добавьте несколько элементов в
 // этот словарь.
-    val mutabbleMap10 = mutableMapOf<String, Int>()
-    mutabbleMap10["First"] = 1
-    mutabbleMap10["Second"] = 2
+    val mutabbleMap10 = mutableMapOf<String, List<Int>>()
+    mutabbleMap10["First"] = listOf<Int>(1,3,4)
+    mutabbleMap10["Second"] = listOf<Int>(2,5,6,7)
 
 // 11 . Создай словарь, в котором ключи - это целые числа, а значения - изменяемые множества строк. Добавь данные в словарь.
 // Получи значение по ключу (это должно быть множество строк) и добавь в это множество ещё строку. Распечатай полученное множество.
