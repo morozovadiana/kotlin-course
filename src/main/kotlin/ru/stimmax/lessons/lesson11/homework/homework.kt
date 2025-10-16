@@ -70,20 +70,17 @@ fun multiplyByTwo(a: Int): Int = a * 2
 
 // 12 .  Создайте функцию isEven, которая принимает целое число и возвращает true, если число чётное, и false в противном случае.
 fun isEven(a: Int): Boolean{
-    if (a % 2 == 0)
-        return true
-    else
-        return false
+    return (a % 2 == 0)
 }
 
 // 13 . Напишите функцию printNumbersUntil, которая принимает целое число n и выводит на экран числа от 1 до n. Если число
 // n меньше 1, функция должна прекратить выполнение с помощью return без вывода сообщений.
 fun printNumbersUntil(n: Int) {
-    for (i in 1..n) {
-        if (n > 1) {
-            println(i)
-        } else
+        if (n < 1) {
             return
+        }
+    for (i in 1..n){
+        println(i)
     }
 }
 
@@ -105,7 +102,7 @@ fun processList(a: List<String?>) {
     for (i in a){
         if (i == null){
             return
-        } else
-            println(i)
+        }
+        println(i)
     }
 }
