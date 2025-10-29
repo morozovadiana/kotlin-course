@@ -1,6 +1,7 @@
 package ru.stimmax.ru.stimmax.lessons.lesson15.homework
 
 import kotlin.collections.forEach
+import kotlin.math.max
 
 
 //Создай подклассы этого контейнера, которые будут добавлять строку material (или коллекции или словари строк) в какое-то
@@ -28,8 +29,9 @@ abstract class Materials {
 class FirstClassMaterial: Materials(){
     fun inputString(material: String) {
         val getMaterial = extractMaterials()
-        addMaterial(material)
-        getMaterial.forEach { addMaterial(it) }
+        addMaterial((material))
+        getMaterial.forEach { addMaterial(it )
+        }
     }
 }
 
@@ -39,10 +41,15 @@ class FirstClassMaterial: Materials(){
 class SecondClassMaterials: Materials(){
     fun inputSequences(material: List<String>){
         val getMaterial = extractMaterials()
-        for (i in getMaterial.indices){
-            addMaterial(material[i])
-        }
+        val maxMeaning = max(getMaterial.size, material.size)
+        for (i in 0..maxMeaning) {
+            if (i < material.size){
+                addMaterial(material[i])
 
+            if (i < getMaterial.size)
+                addMaterial(material[i])
+            }
+        }
     }
 }
 
@@ -50,7 +57,8 @@ class SecondClassMaterials: Materials(){
 
 class ThirdClassMaterials: Materials(){
     fun sortedMaterial(material: String) {
-        val getMaterial = extractMaterials().sorted()
+        val string = (extractMaterials() + material).sorted()
+        string.forEach { addMaterial(it) }
     }
 }
 
@@ -60,6 +68,8 @@ class ThirdClassMaterials: Materials(){
 
 class FourClassMaterial: Materials(){
     fun makeMap(map: Map<String, String>){
-        val result = map.keys + map.values
+         map.keys.reversed().forEach { addMaterial(it)}
+        extractMaterials().forEach { addMaterial(it)}
+        map.values.forEach { addMaterial(it)}
         }
 }

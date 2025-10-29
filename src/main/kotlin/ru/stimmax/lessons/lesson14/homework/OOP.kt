@@ -40,7 +40,8 @@ data class Product(val name: String, val price: Int, var quality: Int)
     // “место проведения”, “стоимость”, “вместимость зала”. Также приватное поле “проданные билеты”. Добавьте метод,
     // который выводит информацию о концерте и метод “купить билет”, который увеличивает количество проданных билетов на один.
 
-class Concert(val group: String, val location: String, val cost: Int, val place: Int, private var tickets: Int) {
+class Concert(val group: String, val location: String, val cost: Int, val place: Int) {
+    private var tickets = 0
     fun concertInfo(){
         println("Информация о концерте: выступаяющая группа - $group, место проведения - $location, стоимость билетов - $cost, вместимость заала - $place")
     }
@@ -64,27 +65,7 @@ class Concert(val group: String, val location: String, val cost: Int, val place:
 
         Product("apple", 23, 25)
 
-        val concert = Concert("bi2", "scene", 245, 250, 45)
+        val concert = Concert("bi2", "scene", 245, 250)
         concert.concertInfo()
         concert.buyTicket()
-
-        val shelf = Shelf(23)
-        println(shelf.addItem("red"))
-        shelf.getItems()
-        println(shelf.removeItem("ref"))
-        shelf.getItems()
-        println(shelf.canAccommodate("red"))
-        println(shelf.containsItem("rev"))
-
-        val rack = Rack(23)
-        println(rack.addShelf(shelf))
-        println(rack.removeShelf(3))
-        println(rack.addItem("hj"))
-        println(rack.removeItem("kl"))
-        println(rack.containsItem("hj"))
-        println(rack.getShelves())
-        println(rack.printContents())
-        println(rack.advancedRemoveShelf(3))
-
-
 }

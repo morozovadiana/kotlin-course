@@ -1,5 +1,7 @@
 package ru.stimmax.ru.stimmax.lessons.lesson14.homework
 
+import kotlin.compareTo
+
 //Задание 6. Стеллаж и полки.
 //Цель задания: Создать систему управления складским пространством с использованием классов "Стеллаж" и "Полка стеллажа".
 //Класс Shelf (Полка Стеллажа)
@@ -8,7 +10,7 @@ package ru.stimmax.ru.stimmax.lessons.lesson14.homework
 //Список предметов (items): хранит названия предметов на полке.
 
 
-class Shelf(val capacity: Int) {
+data class Shelf(val capacity: Int) {
     private val items = mutableListOf<String>("rev", "ref")
     //Методы:
     //Добавление Предмета (addItem):
@@ -16,12 +18,12 @@ class Shelf(val capacity: Int) {
     fun addItem(name: String): Boolean {
         //Проверяет, поместится ли предмет на полку, учитывая длину его названия и текущее заполнение полки.
         //Возвращает true и добавляет предмет, если есть место. В противном случае возвращает false.
-        if (name.length <= capacity) {
+        if (canAccommodate(name)) {
             items.add(name)
             return true
-        } else
-            return false
+        } else return false
     }
+
 
     //Удаление Предмета (removeItem):
     //Принимает название предмета.
@@ -39,22 +41,28 @@ class Shelf(val capacity: Int) {
     fun canAccommodate(name: String): Boolean {
         //Определяет, вместится ли предмет на полку.
         //Возвращает true, если предмет вместится, и false, если места недостаточно.
-        return if (name.length <= capacity) {
-            true
-        } else
-            false
+        val space = items.sumOf { it.length }
+        return space + name.length < capacity
     }
 
     //Проверка наличия предмета (containsItem):
     //Принимает название предмета
     fun containsItem(name: String): Boolean {
         //Возвращает true если такой предмет есть
-        return if (items.contains(name)) {
-            true
-        } else
-            false
+        return items.contains(name)
     }
 
     //Получение списка предметов (getItems):
     fun getItems() = items.toList()
+}
+
+fun main() {
+    val shelf = Shelf(23)
+    println(shelf.addItem("red"))
+    shelf.getItems()
+    println(shelf.removeItem("ref"))
+    shelf.getItems()
+    println(shelf.canAccommodate("red"))
+    println(shelf.containsItem("rev"))
+
 }

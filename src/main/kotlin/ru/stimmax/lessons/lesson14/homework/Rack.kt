@@ -12,7 +12,7 @@ class Rack(val maxShelvesCount: Int) {
     //Возвращает true, если полка была успешно добавлена или false если стеллаж уже заполнен или была попытка добавить
     // полку которая уже установлена.
     fun addShelf(newShelf: Shelf): Boolean {
-        if (shelves.contains(newShelf) || shelves.size == maxShelvesCount)
+        if (shelves.contains(newShelf) && shelves.size >= maxShelvesCount)
             return false
         shelves.add(newShelf)
         return true
@@ -22,10 +22,11 @@ class Rack(val maxShelvesCount: Int) {
     //Принимает индекс полки для удаления.
     //Удаляет полку по указанному индексу.
     //Возвращает список предметов полки, если полка была успешно удалена или пустой список если полка не существует.
-    fun removeShelf(indexShelf: Int): List<Shelf> {
+    fun removeShelf(indexShelf: Int): List<String> {
         if (indexShelf in shelves.indices) {
+            val otherItems = shelves[indexShelf].getItems()
             shelves.removeAt(indexShelf)
-            return shelves.toList()
+            return otherItems
         }
         return emptyList()
     }
@@ -36,8 +37,8 @@ class Rack(val maxShelvesCount: Int) {
     fun addItem(name: String): Boolean {
         for (shelf in shelves) {
             if (shelf.canAccommodate(name))
-                shelf.getItems()
-            return true
+                shelf.addItem(name)
+                return true
         }
         return false
     }
@@ -71,12 +72,17 @@ class Rack(val maxShelvesCount: Int) {
     //Выводит в консоль информацию о каждой полке: индекс, вместимость, оставшуюся вместимость, список предметов.
     // Информацию выводить в наглядном читаемом виде
     fun printContents() {
-        for (i in shelves.indices) {
+        shelves.forEachIndexed { i, shelf ->
             val index = i
-            val capacity = shelves[i].capacity
-            val otherCapacity = maxShelvesCount - capacity
-            val listNames = shelves[i]
-            println("индекс - $index, вместимость - $capacity, оставшуюся вместимость - $otherCapacity, список предметов - $listNames")
+            val capacity = shelf.capacity
+            val usedSpace = shelf.getItems().sumOf { it.length }
+            val otherCapacity = capacity - usedSpace
+            val listNames = shelf.getItems()
+
+            println("индекс - $index, " +
+                    "вместимость - $capacity, " +
+                    "оставшаяся вместимость - $otherCapacity, " +
+                    "список предметов - $listNames")
         }
     }
 
@@ -99,4 +105,16 @@ class Rack(val maxShelvesCount: Int) {
         shelves.removeAt(indexShelf)
         return notReplacedItems.toList()
     }
+}
+
+fun main() {
+    val rack = Rack(23)
+    //println(rack.addShelf())
+    println(rack.removeShelf(3))
+    println(rack.addItem("hj"))
+    println(rack.removeItem("kl"))
+    println(rack.containsItem("hj"))
+    println(rack.getShelves())
+    println(rack.printContents())
+    println(rack.advancedRemoveShelf(3))
 }
