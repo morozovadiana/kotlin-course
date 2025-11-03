@@ -2,6 +2,7 @@ package ru.stimmax.ru.stimmax.lessons.lesson16.homework.redefenition
 
 import ru.stimmax.ru.stimmax.lessons.lesson16.lesson.Background
 import ru.stimmax.ru.stimmax.lessons.lesson16.lesson.Colors
+import ru.stimmax.ru.stimmax.lessons.lesson16.lesson.printColored
 
 // 3 . Принтер
 //Создай абстрактный принтер, который имеет абстрактный метод печати, принимающий в качестве аргумента строку.
@@ -17,9 +18,9 @@ abstract class Printer {
     protected fun printText(text: String, map: List<Pair<String, String>>) {
         val splitText = text.split(" ")
         var index = 0
-        splitText.indices.forEach { it ->
+        for (i in splitText.indices){
             if (index < map.size){
-                //printColored(splitText[it], map[index].first(), map[index].second)
+                printColored(splitText[i], map[index].first, map[index].second)
             }
         }
     }

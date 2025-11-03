@@ -12,14 +12,14 @@ class Bag (
 
     // 1 . Базовый метод addToCart(itemId) добавляет одну единицу товара к уже существующим в корзине.
     fun addToCart(itemId: String) {
-        map.getOrDefault(itemId, 0) + 1
+        map[itemId]=map.getOrDefault(itemId, 0) + 1
 
 
     }
 // 2 . Выполнить перегрузку addToCart который:
 // 1 . Принимает два аргумента (itemId и количество amount)
     fun addToCart(itemId: String, amount: Int) {
-        map.getOrDefault(itemId, 0) + amount
+    map[itemId]=map.getOrDefault(itemId, 0) + amount
 
 }
 // 2 . Принимает словарь из id и количества и добавляет всё в корзину
@@ -30,7 +30,7 @@ class Bag (
     }
 // 3 . Принимает список из id (добавляет по одной единице).
     fun addToCart(id: List<String>) {
-       id.forEach { it->
+       id.forEach {
             addToCart(it)
        }
     }
@@ -52,8 +52,8 @@ fun main() {
     bag.addToCart(listGoods)
     // 5 . Переопредели у корзины метод toString для красивого форматирования содержимого таблицы, включая итоговое количество
 // артикулов и общее количество всего товара в корзине.
-    goods.forEach { (k, v) ->
-        println("Артикул $k -- Количество $v")
-    }
+    val list = goods.map{"Артикул ${it.key}           Количество ${it.value}"}
+        .joinToString("\n")
+    println(list + "Всего артикулов ${goods.size}    Всего товаров ${goods.values.sum()}")
 
 }
