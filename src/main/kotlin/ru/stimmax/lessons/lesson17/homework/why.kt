@@ -75,9 +75,9 @@ class ChildrenClass(
         return value.length < 50
     }
 
-    fun setProtectedField(meaning: String){
-        protectedField = meaning
-    }
+    //fun setProtectedField(meaning: String){
+     //   protectedField = meaning
+   // }
 }
 
 fun main() {
