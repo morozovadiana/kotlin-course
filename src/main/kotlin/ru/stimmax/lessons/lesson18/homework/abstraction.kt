@@ -86,26 +86,26 @@ interface Rechargeable {
 //Холодильник
 abstract class Refrigerators: Powerable, Openable, TemperatureRegulatable, LightEmitting
 //Стиральная машина
-abstract class WachingMashines: Powerable, Openable, TemperatureRegulatable, WaterConnection, AutomaticShutdown, Drainable, Timable, SoundEmitting, Programmable, Cleanable
+abstract class WachingMashines: Powerable, Openable, TemperatureRegulatable, WaterConnection, AutomaticShutdown, Drainable, SoundEmitting, Programmable, Cleanable
 //Умная лампа
 abstract class SmartLamps: Powerable, TemperatureRegulatable, AutomaticShutdown, LightEmitting, Programmable
 //Электронные часы
-abstract class SmartWatches: Powerable, BatteryOperated, Rechargeable
+abstract class SmartWatches: Powerable, Rechargeable, LightEmitting, SoundEmitting
 //Робот-пылесос
-abstract class VacuumCliners: Powerable, WaterContainer, AutomaticShutdown, Timable, BatteryOperated, SoundEmitting, Programmable, Movable, Cleanable, Rechargeable
+abstract class VacuumCliners: Powerable, WaterContainer, Openable, AutomaticShutdown, SoundEmitting, Programmable, Movable, Cleanable, Rechargeable
 //Механические часы
-abstract class MechanicalWatches: BatteryOperated, Mechanical
+abstract class MechanicalWatches: BatteryOperated, Mechanical, Timable
 //Фонарик
-abstract class Flashlights: Powerable, TemperatureRegulatable, BatteryOperated, LightEmitting
+abstract class Flashlights: Powerable, BatteryOperated, LightEmitting
 //Кофемашина
-abstract class CoffeeMachines: Powerable, WaterContainer, TemperatureRegulatable, WaterConnection, AutomaticShutdown, Timable, Programmable, Cleanable
+abstract class CoffeeMachines: Powerable, Openable, WaterContainer, TemperatureRegulatable, WaterConnection, AutomaticShutdown, Programmable, Cleanable
 //Умная колонка
-abstract class SmartColones: Powerable, AutomaticShutdown, Timable, LightEmitting, SoundEmitting, Programmable, Rechargeable
+abstract class SmartColones: Powerable, AutomaticShutdown, LightEmitting, SoundEmitting, Programmable, Rechargeable
 
 //Задача 2. Создай абстрактный класс для включаемого оборудования и имплементируй соответствующий интерфейс с реализацией
 // методов (достаточно println с выполняемым действием).
 abstract class TurnOnEquipment: Powerable{
-    var turnOn: Boolean = false
+    private var turnOn: Boolean = false
         private set
     override fun powerOn(){
         turnOn = true
@@ -117,28 +117,67 @@ abstract class TurnOnEquipment: Powerable{
         powerOff()
         println("Turn Off")
     }
+
+    protected fun getDeviceState() : Boolean = turnOn
 }
 
 //Задача 3. Создай абстрактный класс для программируемого оборудования (с имплементацией соответствующего интерфейса и
 // реализацией методов) и наследуй его от абстрактного класса включаемого оборудования.
 
 abstract class ProgrammingEquipment: TurnOnEquipment(), Programmable{
-    fun setProgramm(){
-        programAction("do smth")
+    private var programm = ""
+    override fun programAction(action: String){
+        programm = action
+        println("Start $action")
     }
+
+    override fun execute() {
+        if (programm!=""){
+            println("$programm starting")
+        }
+        println("$programm is empty")
+    }
+    protected fun deviceActions() = programm
 }
 
 
 //Задача 4. Создай абстрактный класс оборудования с возможностью устанавливать температуру и открываться и с наследованием
 // от программируемого оборудования. Также имплементируй интерфейсы.
-abstract class SetTemperatureAndOpen: ProgrammingEquipment(), Openable, TemperatureRegulatable{
+abstract class SetTemperatureAndOpen(
+    override val maxTemperature: Int
+): ProgrammingEquipment(), Openable, TemperatureRegulatable{
+
+    private var currentTemp = 20
+    private var isOpen = false
+
     fun openEquipment(){
         open()
     }
-    fun setTemperature(){
-        maxTemperature
-        setTemperature(maxTemperature)
+
+    override fun setTemperature(temp: Int) {
+        if (temp <= maxTemperature){
+            currentTemp = temp
+            println("$temp is set")
+        } else
+        println("$temp is not set")
     }
+
+    override fun open() {
+        if (isOpen){
+            isOpen = true
+            println("open")
+        } else
+            println("close")
+    }
+
+    override fun close() {
+        if (isOpen){
+            isOpen=false
+            println("close")
+        } else
+            println("oprn")
+    }
+
 }
 
 //Задача 5. Создай не абстрактные классы устройств с наследованием от абстрактного класса с возможностью устанавливать

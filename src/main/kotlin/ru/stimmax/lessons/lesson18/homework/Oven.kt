@@ -1,6 +1,6 @@
 package ru.stimmax.ru.stimmax.lessons.lesson18.homework
 
-class Oven(override val maxTemperature: Int) : SetTemperatureAndOpen(), Timable{
+class Oven(override val maxTemperature: Int) : SetTemperatureAndOpen(34), Timable{
 
     var isPoweredOn: Boolean = false
         private set

@@ -6,7 +6,7 @@ class WashingMachine(
     override val maxTemperature: Int,
     override val sensorType: String,
     override val maxSensoredValue: Int
-) : SetTemperatureAndOpen(), WaterConnection, AutomaticShutdown, Drainable, Timable, SoundEmitting, Cleanable{
+) : SetTemperatureAndOpen(34), WaterConnection, AutomaticShutdown, Drainable, Timable, SoundEmitting, Cleanable{
 
     var isPoweredOn: Boolean = false
         private set
@@ -96,7 +96,7 @@ fun main() {
         maxSensoredValue = 20
     )
     washingMachine.powerOn()
-    washingMachine.setTemperature()
+    washingMachine.setTemperature(45)
     washingMachine.programAction("washing")
     washingMachine.powerOff()
 }

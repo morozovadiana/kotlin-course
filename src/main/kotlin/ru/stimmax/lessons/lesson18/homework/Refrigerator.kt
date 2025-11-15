@@ -1,6 +1,6 @@
 package ru.stimmax.ru.stimmax.lessons.lesson18.homework
 
-class Refrigerator(override val maxTemperature: Int) : SetTemperatureAndOpen(), LightEmitting{
+class Refrigerator(override val maxTemperature: Int) : SetTemperatureAndOpen(maxTemperature), LightEmitting{
 
     var isPoweredOn: Boolean = false
         private set
@@ -56,7 +56,7 @@ fun main() {
     val refrigerator = Refrigerator(15)
     refrigerator.powerOn()
     refrigerator.open()
-    refrigerator.setTemperature()
+    refrigerator.setTemperature(23)
     refrigerator.programAction("freeze")
     refrigerator.powerOff()
 }

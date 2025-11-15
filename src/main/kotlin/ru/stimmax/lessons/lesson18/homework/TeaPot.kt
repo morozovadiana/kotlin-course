@@ -5,7 +5,7 @@ class Teapot(
     override val capacity: Int,
     override val sensorType: String,
     override val maxSensoredValue: Int
-) : SetTemperatureAndOpen(), WaterContainer, AutomaticShutdown{
+) : SetTemperatureAndOpen(45), WaterContainer, AutomaticShutdown{
 
     var isPoweredOn: Boolean = false
         private set
