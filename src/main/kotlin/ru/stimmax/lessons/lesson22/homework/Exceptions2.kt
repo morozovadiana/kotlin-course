@@ -92,7 +92,7 @@ fun main() {
     }
 }
 
-open class Animal{}
+open class Animal
 class Dog : Animal(){}
 
     fun checkAge(age: Int) {
