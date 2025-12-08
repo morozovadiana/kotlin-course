@@ -63,23 +63,35 @@ val fun8 = {arg: Long -> require(arg > 0)
 // более одного раза).
 
 fun List<Int>.dubles(): Set<Int>{
-    return groupBy { it }
-        .filter { it.value.size > 1 }
-        .values.flatten() as Set<Int>
+    return toSet().associate { element ->
+        element to this.count { it == element }
+    }.filter { it.value > 1 }
+        .keys
 }
 //Создай аналогичную анонимную функцию.
 
 val dubles1 = fun List<Int>.(): Set<Int>{
-    return groupBy { it }
-        .filter { it.value.size > 1 }
-        .values.flatten() as Set<Int>
+    return toSet().associate { element ->
+        element to this.count { it == element }
+    }.filter { it.value > 1 }
+        .keys
 }
 
 //Создай аналогичное лямбда выражение с указанием типа.
 val dubles2: List<Int>.() -> Set<Int> = {
-    groupBy { it }
-        .filter { it.value.size > 1 }
-        .values.flatten() as Set<Int>
+     toSet().associate { element ->
+        element to this.count { it == element }
+    }.filter { it.value > 1 }
+        .keys
 }
 
 //Проверь, что лямбда выражение работает правильно с помощью нескольких наборов данных.
+fun main() {
+    val list1 = listOf<Int>()
+    val list2 = listOf(1)
+    val list3 = listOf(1, 2, 3, 4, 5, 6)
+    println(fun3(list3))
+
+    val l = listOf(0, 1, 2, 4, 2, 5, 6, 5, 7)
+    println(l.dubles2())
+}
