@@ -59,5 +59,5 @@ fun infiniteRecursion() {
     infiniteRecursion()
 }
 
-open class Animal
-class Dog : Animal(){}
+//open class Animal
+//class Dog : Animal(){}
